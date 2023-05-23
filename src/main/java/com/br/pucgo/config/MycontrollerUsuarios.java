@@ -20,27 +20,25 @@ import com.br.pucgo.view.UsuariosServices;
 
 @RestController
 @RequestMapping("/usuarios")
-@CrossOrigin(origins = "http://localhost:3000")
+@CrossOrigin(origins = "*")
 public class MycontrollerUsuarios {
 
     @Autowired
     UsuariosServices usuariosServices;
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @PostMapping
-    public ResponseEntity<String> inserirUsuarios(@RequestBody Usuarios usuarios){
+    @PostMapping("/inserir")
+    public ResponseEntity<String> inserirUsuarios(@RequestBody Usuarios nome_usuarios){
         try {
-            usuariosServices.inserirUsuario(usuarios);
+            usuariosServices.inserirUsuario(nome_usuarios);
             return ResponseEntity.ok("Usuario inserido com sucesso!");
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao inserir usuario no banco de dados.");
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping("/{id}")
-    public ResponseEntity<Usuarios> buscarUsuarioPorId(@PathVariable Long id) {
-        Optional<Usuarios> usuarios = usuariosServices.buscarUsuariosPorId(id);
+    @GetMapping("/buscar/{id_usuarios}")
+    public ResponseEntity<Usuarios> buscarUsuarioPorId(@PathVariable Long id_usuarios) {
+        Optional<Usuarios> usuarios = usuariosServices.buscarUsuariosPorId(id_usuarios);
         if (usuarios.isPresent()) {
             return ResponseEntity.ok(usuarios.orElse(null));
         } else {
@@ -48,8 +46,7 @@ public class MycontrollerUsuarios {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @DeleteMapping("/{id_usuarios}")
+    @DeleteMapping("/deletar/{id_usuarios}")
     public ResponseEntity<String> deletarUsuario(@PathVariable Long id_usuarios) {
         try {
             usuariosServices.deletarUsuario(id_usuarios);
@@ -59,8 +56,7 @@ public class MycontrollerUsuarios {
         }
     }
 
-    @CrossOrigin(origins = "http://localhost:3000")
-    @GetMapping
+    @GetMapping("/todos")
     public ResponseEntity<List<Usuarios>> buscarTodosUsuarios() {
         List<Usuarios> usuarios = usuariosServices.buscarTodosUsuarios();
         return ResponseEntity.ok(usuarios);

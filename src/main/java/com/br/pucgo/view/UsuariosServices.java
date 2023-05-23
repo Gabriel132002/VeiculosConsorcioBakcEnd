@@ -3,21 +3,26 @@ package com.br.pucgo.view;
 import java.util.List;
 import java.util.Optional;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import com.br.pucgo.model.Usuarios;
 import com.br.pucgo.model.UsuariosRepository;
 
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
 @Service
+@Transactional
 public class UsuariosServices {
     
     @Autowired
     private UsuariosRepository usuariosRepository;
     private final BCryptPasswordEncoder senhaEncoder;
+
+    public UsuariosServices(BCryptPasswordEncoder senhaEncoder) {
+        this.senhaEncoder = senhaEncoder;
+    }
     
     public void inserirUsuario(Usuarios usuarios){
         String senhaCriptografada = senhaEncoder.encode(usuarios.getSenha_usuario());
