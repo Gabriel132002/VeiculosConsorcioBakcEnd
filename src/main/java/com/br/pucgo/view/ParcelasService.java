@@ -2,6 +2,8 @@ package com.br.pucgo.view;
 
 import java.util.*;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,7 @@ import com.br.pucgo.model.ParcelasRepository;
 
 
 @Service
+@Transactional
 public class ParcelasService {
     
     @Autowired
