@@ -42,4 +42,18 @@ public class UsuariosServices {
         return usuariosRepository.findById(id_usuarios);
     }
 
+    public void atualizarUsuario(Long id_usuarios, Usuarios usuarioAtualizado) {
+        Optional<Usuarios> usuarioExistente = usuariosRepository.findById(id_usuarios);
+        if (usuarioExistente.isPresent()) {
+            Usuarios usuario = usuarioExistente.get();
+            usuario.setNome_usuario(usuarioAtualizado.getNome_usuario());
+            usuario.setEmail_usuario(usuarioAtualizado.getEmail_usuario());
+            usuario.setSenha_usuario(usuarioAtualizado.getSenha_usuario());
+            // Atualize outros campos conforme necessário
+
+            usuariosRepository.save(usuario);
+        } else {
+            throw new RuntimeException("Usuário não encontrado");
+        }
+    }
 }

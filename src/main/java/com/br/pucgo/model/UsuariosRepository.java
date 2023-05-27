@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UsuariosRepository extends JpaRepository<Usuarios, Long>{
-    
 
     List<Usuarios> findAll();
     Optional<Usuarios> findById(Long id);
