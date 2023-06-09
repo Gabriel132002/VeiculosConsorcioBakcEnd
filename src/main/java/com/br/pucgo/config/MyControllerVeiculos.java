@@ -26,7 +26,7 @@ public class MyControllerVeiculos {
 
     //veiculos
 
-    @PostMapping
+    @PostMapping("/inserir")
     public ResponseEntity<String> inserirVeiculo(@RequestBody Veiculos veiculos){
         try {
             veiculosServices.inserirVeiculo(veiculos);

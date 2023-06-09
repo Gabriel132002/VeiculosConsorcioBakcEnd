@@ -1,5 +1,6 @@
 package com.br.pucgo.model;
 
+import javax.persistence.Column;
 // import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,15 +23,10 @@ public class Usuarios {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    // @Column(name = "id_usuarios")
+  
     private Long id_usuarios;
-
-    // @Column(name = "nome_usuario")
+    @Column(name = "nome_usuario")
     private String nome_usuario;
-
-    // @Column(name = "email_usuario")
     private String email_usuario;
-
-    // @Column(name = "senha_usuario")
     private String senha_usuario;
 }
